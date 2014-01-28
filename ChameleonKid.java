@@ -23,8 +23,12 @@ public class ChameleonKid extends Critter
         }
         int r = (int) (Math.random() * n);
 
+        if (getGrid().getAdjacentLocation(getDirection());) {
+        	
+        }
+        getGrid().getAdjacentLocation(getDirection());
+
         Actor other = actors.get(r);
-        System.out.println(other);
         setColor(other.getColor());
     }
 
