@@ -1,5 +1,6 @@
 import info.gridworld.actor.Actor;
 import info.gridworld.actor.Critter;
+import info.gridworld.actor.*;
 import info.gridworld.grid.Location;
 import java.awt.Color;
 
@@ -23,11 +24,6 @@ public class ChameleonKid extends Critter
         }
         int r = (int) (Math.random() * n);
 
-        if (getGrid().getAdjacentLocation(getDirection());) {
-        	
-        }
-        getGrid().getAdjacentLocation(getDirection());
-
         Actor other = actors.get(r);
         setColor(other.getColor());
     }
@@ -36,5 +32,25 @@ public class ChameleonKid extends Critter
     {
         setDirection(getLocation().getDirectionToward(loc));
         super.makeMove(loc);
+    }
+
+    public ArrayList<Actor> getActors() {
+       ArrayList<Actor> neighbors = super.getActors();
+       ArrayList<Actor> actors = new ArrayList<Actor>();
+
+       ArrayList<Location> locs = new ArrayList<Location>();
+       locs.add(getLocation().getAdjacentLocation(getDirection()));
+       locs.add(getLocation().getAdjacentLocation(getDirection() + 180));
+
+       for (Actor n : neighbors) {
+           for (Location loc : locs) {
+               if (n.getLocation().equals(loc)) {
+                   actors.add(n);
+                   continue;
+               }
+           }
+       }
+
+       return actors;
     }
 }
